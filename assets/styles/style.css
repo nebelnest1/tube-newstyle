@@ -41,36 +41,76 @@ body.body { margin: 0; padding: 0; background: #000; height: 100vh; overflow: hi
 .xh-play-btn.ready:active svg { filter: drop-shadow(0 0 14px rgba(255,255,255,.95)) drop-shadow(0 0 6px rgba(255,255,255,1)); transform: scale(1.03); }
 
 /* ========================================= */
-/* 3. CUSTOM "PRIVATE ARCHIVE" OVERRIDES     */
+/* 3. PREMIUM "PRIVATE CLOUD" OVERRIDES      */
 /* ========================================= */
-/* Отменяем блокировку скролла из style.css для макета */
-body { background: #f0f0f0; overflow-x: hidden !important; overflow-y: auto !important; height: auto !important; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body { background: #f4f6f8; overflow-x: hidden !important; overflow-y: auto !important; height: auto !important; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
 body.body { height: auto !important; overflow: visible !important; }
-.fade-in-wrapper { max-width: 480px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
 
-/* Новая строгая шапка в стиле Private Archive */
-.vp-header.clean-header { display: flex; justify-content: center; align-items: center; padding: 18px 15px; border-bottom: 1px solid #eaeaea; background: #fff; }
-.home-logo-text { font-size: 22px; font-weight: 800; color: #111; letter-spacing: -0.5px; text-transform: uppercase; margin: 0; display: block; }
-.home-logo-text span { color: #888; font-weight: 400; }
-/* Прячем старые иконки, но они остаются в DOM для JS логики */
+/* Главный контейнер: эффект дорогого приложения */
+.fade-in-wrapper { max-width: 480px; margin: 0 auto; background: #ffffff; min-height: 100vh; box-shadow: 0 0 40px rgba(0,0,0,0.06); }
+
+/* Шапка: Эффект стекла (Glassmorphism), плавающая */
+.vp-header.clean-header { display: flex; justify-content: center; align-items: center; padding: 18px 15px; border-bottom: 1px solid rgba(0,0,0,0.04); background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; }
+.home-logo-text { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; background: linear-gradient(135deg, #111 0%, #555 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: none; margin: 0; display: block; }
+.home-logo-text span { font-weight: 500; background: linear-gradient(135deg, #007aff 0%, #0056b3 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-left: 2px;}
 .vp-header-left, .vp-header-right, .vp-logo { display: none !important; }
 
-/* Адаптация плеера xh- под плавающий макет */
-.xh-bottom-bar { position: absolute !important; padding: 0 10px !important; }
+/* Заголовок */
+.vp-title-section { padding: 20px 20px 16px; }
+.vp-title { font-size: 20px; font-weight: 800; margin: 0 0 12px 0; color: #1a1a1a; letter-spacing: -0.3px; }
+.badge-time, .badge-hd { background: #000; color: #fff; font-size: 11px; padding: 4px 8px; border-radius: 6px; font-weight: 700; letter-spacing: 0.3px; }
 
-/* Упрощение панели действий и удаление "тубовских" красных цветов */
-.action-bar.clean-actions { justify-content: space-around; border-bottom: 1px solid #eaeaea; padding: 12px 15px; }
-.action-item-hide { display: none !important; } /* Скрытие лишних кнопок (Лайки, Share, Report) */
-.badge-hd, .tag-model.red, .thumb-badge-hd, .pl-progress-filled, .pl-progress-dot, .comment-badge, .pl-btn-primary { background: #111 !important; }
-.tag-model.red span { color: #111 !important; }
-.tag-model { background: #f5f5f5; color: #333; font-size: 12px; padding: 4px 10px; border-radius: 6px; font-weight: 500; border: 1px solid #eee; }
+/* Премиальные теги-пилюли */
+.vp-tags-row { gap: 8px; margin-bottom: 12px; }
+.tag-model { background: #f0f2f5; color: #333; font-size: 13px; padding: 6px 12px; border-radius: 20px; font-weight: 600; border: 1px solid transparent; transition: all 0.2s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+.tag-model:hover { transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.05); }
+.tag-model.red, .pl-btn-primary { background: #007aff !important; } /* Заменили "клубнично-красный" на доверительный "облачно-синий" */
+.tag-model.red span { color: #fff !important; }
+.comment-badge { background: #007aff !important; border: 2px solid #fff; top: -10px; right: -14px; box-sizing: content-box; padding: 2px 6px; }
 
-/* Темная тема для нового архива */
+/* Плеер (минималистичный вид) */
+.xh-fake-player { border-radius: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+.xh-bottom-bar { position: absolute !important; padding: 0 15px 10px !important; }
+.pl-progress-filled, .pl-progress-dot { background: #007aff !important; }
+
+/* Панель действий: кнопки в стиле карточек */
+.action-bar.clean-actions { justify-content: space-around; border-bottom: none; padding: 16px 20px 24px; background: #fff; }
+.action-item-hide { display: none !important; }
+.action-item { padding: 8px 16px; border-radius: 16px; background: #f9fafb; transition: background 0.2s ease; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.action-item:active { background: #f0f2f5; }
+.action-item .icon { width: 22px; height: 22px; fill: #4a4a4a; }
+.action-item .value, .action-item .label { font-size: 14px; font-weight: 700; color: #1a1a1a; margin: 0; }
+
+/* Галерея: карточки с левитацией */
+.gallery-title { font-size: 18px; font-weight: 800; color: #1a1a1a; padding: 10px 20px; margin: 0; letter-spacing: -0.3px; display: flex; align-items: center; justify-content: space-between; }
+.gallery-title::after { content: "View all"; font-size: 13px; font-weight: 600; color: #007aff; cursor: pointer; }
+.related-grid { background: #fff; padding: 10px 20px 30px; gap: 20px 16px; grid-template-columns: 1fr 1fr; }
+.thumb-wrapper { border-radius: 14px; box-shadow: 0 6px 16px rgba(0,0,0,0.06); overflow: hidden; border: none; transform: translateZ(0); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.thumb-wrapper:active { transform: scale(0.97); }
+.thumb-title { font-size: 14px; font-weight: 600; color: #1a1a1a; margin-top: 10px; line-height: 1.4; padding: 0 4px; }
+.thumb-channel { font-size: 12px; color: #888; margin-top: 4px; font-weight: 500; padding: 0 4px; }
+.thumb-badge-hd, .thumb-badge-time { border-radius: 6px; font-weight: 700; padding: 4px 6px; letter-spacing: 0.2px; }
+.thumb-badge-hd { background: rgba(0, 0, 0, 0.75) !important; backdrop-filter: blur(4px); top: 8px; right: 8px; }
+
+/* Темная тема: Глубокая и атмосферная, как у флагманских интерфейсов */
 @media(prefers-color-scheme: dark) {
-  body { background: #000; }
-  .fade-in-wrapper { background: #121212; border-left: 1px solid #222; border-right: 1px solid #222; }
-  .vp-header.clean-header { background: #121212; border-bottom-color: #222; }
-  .home-logo-text { color: #fff; }
-  .action-bar.clean-actions { border-bottom-color: #222; }
-  .tag-model { background: #1e1e1e; color: #ccc; border-color: #333; }
+  body { background: #0a0a0c; }
+  .fade-in-wrapper { background: #121214; border-left: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+  .vp-header.clean-header { background: rgba(18, 18, 20, 0.85); border-bottom-color: rgba(255,255,255,0.05); }
+  .home-logo-text { background: linear-gradient(135deg, #fff 0%, #aaa 100%); -webkit-background-clip: text; }
+  .home-logo-text span { background: linear-gradient(135deg, #0a84ff 0%, #0056b3 100%); -webkit-background-clip: text; }
+  .vp-title { color: #f5f5f7; }
+  .tag-model { background: #1c1c1e; color: #ebebf5; border: 1px solid rgba(255,255,255,0.05); box-shadow: none; }
+  .action-bar.clean-actions { background: #121214; }
+  .action-item { background: #1c1c1e; }
+  .action-item:active { background: #2c2c2e; }
+  .action-item .icon { fill: #a1a1a6; }
+  .action-item .value, .action-item .label { color: #f5f5f7; }
+  .comment-badge { border-color: #1c1c1e; }
+  .gallery-title { color: #f5f5f7; }
+  .related-grid { background: #121214; }
+  .thumb-wrapper { box-shadow: 0 6px 16px rgba(0,0,0,0.3); }
+  .thumb-title { color: #f5f5f7; }
+  .thumb-channel { color: #a1a1a6; }
+  .pl-modal-content { background: rgba(28, 28, 30, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
 }
