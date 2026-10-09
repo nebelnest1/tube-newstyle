@@ -92,3 +92,8 @@ body{background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,-app
 .clone-mode .pl-video-container.xh-fake-player{margin:0!important;border:0!important;border-radius:0!important}
 .clone-mode .pl-play-btn.ready svg{animation:none}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Original centered HomeVideo header. */
+.vp-header.clean-header{justify-content:center}
+.home-logo-text{font-size:20px;letter-spacing:-.5px;text-align:center}
+#t-headerCountry{display:inline;font-size:inherit;letter-spacing:inherit;font-weight:500;line-height:inherit;text-transform:none;color:var(--accent)}
