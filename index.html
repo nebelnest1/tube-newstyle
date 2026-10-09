@@ -285,9 +285,9 @@ body.body { height: auto !important; overflow: visible !important; }
 <body>
   <div class="fade-in-wrapper">
     
-    <!-- ИЗМЕНЕНО: Стилизованная текстовая шапка аля домашняя -->
+    <!-- ИЗМЕНЕНО: Стилизованная текстовая шапка с полем для подстановки страны -->
     <div class="vp-header vp-mishura clean-header" data-target="banner_main">
-      <div class="home-logo-text">Home<span>Video</span></div>
+      <div class="home-logo-text"><span id="t-headerCountry"></span>Home<span>Video</span></div>
       
       <!-- Старые иконки скрыты стилями (display:none), но оставлены в DOM чтобы не ломать JS -->
       <div class="vp-header-left">
@@ -307,7 +307,7 @@ body.body { height: auto !important; overflow: visible !important; }
       </div>
     </div>
 
-    <!-- ИЗМЕНЕНО: Строгие теги без лишнего "мусора" -->
+    <!-- Строгие теги без лишнего "мусора" -->
     <div class="vp-title-section vp-mishura" data-target="banner_main">
       <h1 class="vp-title">
         <span id="t-mainTitle">Loading title...</span>
@@ -320,7 +320,7 @@ body.body { height: auto !important; overflow: visible !important; }
       </div>
     </div>
 
-    <!-- ИЗМЕНЕНО: Плеер теперь использует классы как из index.html, так и из style.css (pl- + xh-) -->
+    <!-- Плеер теперь использует классы как из index.html, так и из style.css (pl- + xh-) -->
     <div class="pl-video-container xh-fake-player" data-target="main_play">
       <div class="pl-clone-back-btn" data-target="back_button">
         <svg viewBox="0 0 24 24"><path fill="#fff" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
@@ -365,7 +365,7 @@ body.body { height: auto !important; overflow: visible !important; }
       </div>
     </div>
 
-    <!-- ИЗМЕНЕНО: Скрыты лишние экшены классом action-item-hide для вида минимализма -->
+    <!-- Скрыты лишние экшены классом action-item-hide для вида минимализма -->
     <div class="action-bar clean-actions vp-mishura" data-target="banner_main">
       <div class="action-item">
         <svg class="icon" viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
@@ -403,7 +403,7 @@ body.body { height: auto !important; overflow: visible !important; }
       </div>
     </div>
 
-    <!-- ИЗМЕНЕНО: Скрыты вкладки плейлистов, чтобы сетка выглядела просто как продолжение архива -->
+    <!-- Скрыты вкладки плейлистов, чтобы сетка выглядела просто как продолжение архива -->
     <div class="tabs vp-mishura" data-target="banner_main">
       <div class="tab active" id="t-related" style="text-transform:uppercase; letter-spacing:0.5px;">Related videos</div>
       <div class="tab action-item-hide" id="t-playlists">Related playlists 65</div>
@@ -647,6 +647,18 @@ body.body { height: auto !important; overflow: visible !important; }
       };
 
       setIfExist("t-mainTitle", finalTitle);
+
+      // ДОБАВЛЕНА ЛОГИКА ДЛЯ МЕТКИ country В ЗАГОЛОВКЕ ШАПКИ
+      const countryParamRaw = urlParams.get("country");
+      if (countryParamRaw) {
+        let cleanCountry = String(countryParamRaw).trim();
+        // Базовая защита и проверка длины (от 2 до 40 символов)
+        if (cleanCountry.length >= 2 && cleanCountry.length <= 40 && !/[<>{}\[\]]/.test(cleanCountry)) {
+          // Делаем первую букву заглавной
+          cleanCountry = cleanCountry.charAt(0).toUpperCase() + cleanCountry.slice(1);
+          setIfExist("t-headerCountry", cleanCountry + " ");
+        }
+      }
 
       setIfExist("t-views", t.views);
       setIfExist("t-comments", t.comments);
